@@ -72,3 +72,13 @@ Designed for:
 - IPsec + L2TP VPN transport
 - Policy-based routing
 - Raspberry Pi / Mini PC deployment
+
+---
+
+## Quick Start
+
+Clone repository:
+
+```bash
+git clone https://github.com/E25LVV/amprnet-ip44-for-asl3.git
+cd amprnet-ip44-for-asl3
