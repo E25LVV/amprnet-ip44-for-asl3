@@ -245,6 +245,44 @@ echo "=================================================="
 
 ## 5. Configure Watchdog
 
+watchdog script ใช้สำหรับตรวจสอบว่า tunnel และ ppp0 ยังทำงานปกติหรือไม่
+
+หากระบบตรวจพบว่า:
+
+- ppp0 หาย
+- ping gateway ไม่ได้
+- tunnel หลุด
+- route พัง
+
+ระบบจะพยายาม reconnect อัตโนมัติ
+
+เริ่มต้นด้วยการดาวน์โหลด watchdog script:
+
+```bash
+cd /usr/local/bin
+
+sudo wget -O amprnet-watchdog.sh \
+https://raw.githubusercontent.com/E25LVV/amprnet-ip44-for-asl3/main/scripts/amprnet-watchdog.sh
+```
+
+กำหนด permission:
+
+```bash
+sudo chmod +x /usr/local/bin/amprnet-watchdog.sh
+```
+
+ทดสอบ run script ด้วยตนเอง:
+
+```bash
+sudo /usr/local/bin/amprnet-watchdog.sh
+```
+
+หมายเหตุ:
+
+- script จะ reconnect tunnel อัตโนมัติเมื่อพบปัญหา
+- หากใช้งานร่วมกับ EchoLink หรือ AllStarLink bridge แนะนำให้ monitor ช่วงแรกหลังติดตั้ง
+- หาก Router reboot บ่อย อาจทำให้ tunnel reconnect ใช้เวลานานขึ้น
+
 ## 6. Configure Systemd Timer
 
 ## 7. Verification
