@@ -9,25 +9,6 @@ Field-tested workflow for:
 - AMPRNet IP44
 
 ---
-
-## 1. Prepare Required Information
-
-## 2. Enable IPsec Pass-through on Router
-
-## 3. Install Required Packages
-
-## 4. Create vpn_injector.sh
-
-## 5. Configure Watchdog
-
-## 6. Configure Systemd Timer
-
-## 7. Verification
-
-## 8. Recovery & Debugging
-
-## 9. Final Testing
-
 ## Overview
 
 คู่มือฉบับนี้เป็น workflow ภาคสนามสำหรับติดตั้ง AMPRNet IP44
@@ -62,3 +43,61 @@ Known limitations:
 - ยังไม่รองรับ Dual WAN
 - Mikrotik FastTrack อาจทำให้ tunnel มีปัญหา
 - OpenWRT policy routing ขั้นสูง อาจต้องปรับเพิ่มเติม
+
+
+
+## 1. Prepare Required Information
+
+ก่อนเริ่มติดตั้ง ให้เตรียมข้อมูลส่วนตัวของสถานีให้พร้อม
+
+คู่มือชุดนี้ใช้ข้อมูลหลักเพียงไม่กี่รายการ
+โดยค่ากลางของระบบ AMPRNet ถูกกำหนดไว้ให้แล้ว
+
+กรุณาเตรียมข้อมูลดังนี้
+
+```bash
+VPN_USER="your-vpn-user"
+VPN_PASSWORD="your-vpn-password"
+YOUR_IP44="44.xx.xx.xx"
+```
+
+ตัวอย่าง:
+
+```bash
+VPN_USER="e25lvv-node"
+VPN_PASSWORD="MySecretPass123"
+YOUR_IP44="44.32.81.xx"
+```
+
+ข้อมูลส่วนกลางของระบบ:
+
+```bash
+GATEWAY_HOST="gw01.ham.in.th"
+GATEWAY_IP="81.31.234.70"
+IPSEC_KEY="dtdxa"
+IP44_GATEWAY_INTERNAL="44.32.81.1"
+```
+
+หมายเหตุ:
+
+- ควรตรวจสอบหมายเลข IP44 ให้ถูกต้องก่อนเริ่มติดตั้ง
+- แนะนำให้บันทึกข้อมูลไว้ก่อน reboot หรือปรับแต่งระบบ
+- หากกรอก IP44 ผิด อาจทำให้ routing ทำงานผิดพลาด
+
+## 2. Enable IPsec Pass-through on Router
+
+## 3. Install Required Packages
+
+## 4. Create vpn_injector.sh
+
+## 5. Configure Watchdog
+
+## 6. Configure Systemd Timer
+
+## 7. Verification
+
+## 8. Recovery & Debugging
+
+## 9. Final Testing
+
+
