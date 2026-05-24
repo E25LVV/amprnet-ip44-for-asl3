@@ -28,3 +28,47 @@ scripts/
 README.md
 LICENSE
 ```
+---
+
+## Documentation
+
+- docs/introduction.md
+  - Project introduction
+  - Deployment philosophy
+  - Operational overview
+
+- docs/architecture.md
+  - High-level AMPRNet system architecture
+  - Routing concepts
+  - Recovery design
+
+- docs/watchdog-architecture.md
+  - Watchdog routing engine
+  - VPN recovery workflow
+  - Policy routing rebuild process
+
+---
+
+## Design Philosophy
+
+This repository is built around:
+
+- Production-safe deployment
+- Observable operational behavior
+- Minimal manual recovery
+- Reproducible infrastructure
+- Debian 12/13 compatibility
+- Amateur radio real-world operations
+
+---
+
+## Environment
+
+Designed for:
+
+- AllStarLink 3 (ASL3)
+- Debian 12 / 13
+- AMPRNet IP44 networking
+- IPsec + L2TP VPN transport
+- Policy-based routing
+- Raspberry Pi / Mini PC deployment
