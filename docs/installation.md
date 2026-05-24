@@ -466,6 +466,153 @@ journalctl -u strongswan-starter -n 50
 - ช่วงแรกหลังติดตั้ง แนะนำให้ monitor log ระยะหนึ่งก่อนใช้งานจริง
 ## 8. Recovery & Debugging
 
+หาก tunnel ไม่ทำงาน หรือ ppp0 ไม่ขึ้น
+สามารถตรวจสอบตามอาการด้านล่างนี้ได้
+
+---
+
+## กรณี ppp0 ไม่ถูกสร้าง
+
+ตรวจสอบ service:
+
+```bash
+sudo systemctl status xl2tpd
+```
+
+ลอง restart:
+
+```bash
+sudo systemctl restart xl2tpd
+```
+
+จากนั้นตรวจสอบอีกครั้ง:
+
+```bash
+ip a
+```
+
+---
+
+## กรณี tunnel ไม่ ESTABLISHED
+
+ตรวจสอบ IPsec status:
+
+```bash
+sudo ipsec status
+```
+
+ลอง restart strongSwan:
+
+```bash
+sudo systemctl restart strongswan-starter
+```
+
+ตรวจสอบ log:
+
+```bash
+journalctl -u strongswan-starter -n 50
+```
+
+---
+
+## กรณี ping gateway ไม่ได้
+
+ตรวจสอบ:
+
+```bash
+ip route
+```
+
+และ:
+
+```bash
+ip a
+```
+
+หากไม่มี ppp0
+แสดงว่า PPP tunnel ยังไม่เชื่อมต่อ
+
+---
+
+## กรณี watchdog reconnect ไม่ทำงาน
+
+ทดสอบ run script ด้วยตนเอง:
+
+```bash
+sudo /usr/local/bin/amprnet-watchdog.sh
+```
+
+ตรวจสอบ timer:
+
+```bash
+systemctl status amprnet-watchdog.timer
+```
+
+ตรวจสอบ log:
+
+```bash
+journalctl -u amprnet-watchdog.service -n 20
+```
+
+---
+
+## กรณี reboot แล้ว tunnel ไม่กลับมา
+
+ลอง restart service:
+
+```bash
+sudo systemctl restart strongswan-starter
+sudo systemctl restart xl2tpd
+```
+
+จากนั้นรอประมาณ 10-30 วินาที
+
+---
+
+## กรณี route พัง หรือ SSH หลุด
+
+หลีกเลี่ยงการเปลี่ยน default route ของระบบ
+
+คู่มือชุดนี้ออกแบบให้:
+
+- internet ปกติ วิ่งออก gateway เดิม
+- traffic IP44 วิ่งผ่าน ppp0
+
+หากเปลี่ยน default route อาจทำให้:
+
+- SSH หลุด
+- Allmon3 เข้าไม่ได้
+- เกิด one-way audio
+- tunnel reconnect ผิดเส้นทาง
+
+---
+
+## ดู log แบบ realtime
+
+xl2tpd:
+
+```bash
+journalctl -fu xl2tpd
+```
+
+strongSwan:
+
+```bash
+journalctl -fu strongswan-starter
+```
+
+watchdog:
+
+```bash
+journalctl -fu amprnet-watchdog.service
+```
+
+หมายเหตุ:
+
+- บาง Router จะ reconnect tunnel ช้าหลัง reboot
+- ISP บางรายอาจ block หรือ delay IPsec traffic
+- หากใช้งาน CGNAT tunnel อาจไม่เสถียร
+- หาก tunnel reconnect บ่อย ควรตรวจสอบ Router และ Internet stability ก่อน
 ## 9. Final Testing
 
 
