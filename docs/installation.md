@@ -613,6 +613,102 @@ journalctl -fu amprnet-watchdog.service
 - ISP บางรายอาจ block หรือ delay IPsec traffic
 - หากใช้งาน CGNAT tunnel อาจไม่เสถียร
 - หาก tunnel reconnect บ่อย ควรตรวจสอบ Router และ Internet stability ก่อน
+  
 ## 9. Final Testing
 
+หลังจากติดตั้งและตรวจสอบครบทุกขั้นตอนแล้ว
+แนะนำให้ทดสอบการใช้งานจริงผ่านเครือข่าย IP44
+
+---
+
+## ทดสอบ SSH ผ่าน IP44
+
+เปิดโปรแกรม SSH เช่น PuTTY
+แล้วเชื่อมต่อไปยังหมายเลข IP44 ของ node
+
+ตัวอย่าง:
+
+```text
+44.xx.xx.xx
+```
+
+หากเชื่อมต่อได้
+แสดงว่า tunnel และ routing ทำงานปกติ
+
+---
+
+## ทดสอบ Internet จากภายใน tunnel
+
+หลัง login ผ่าน IP44 แล้ว
+ลองทดสอบ:
+
+```bash
+ping google.com
+```
+
+และ:
+
+```bash
+curl ifconfig.me
+```
+
+---
+
+## ทดสอบ Allmon3
+
+เปิดเว็บเบราว์เซอร์ แล้วเข้า:
+
+```text
+http://YOUR-IP44-ADDRESS
+```
+
+ตัวอย่าง:
+
+```text
+http://44.xx.xx.xx
+```
+
+หากสามารถ login และดูสถานะ node ได้
+แสดงว่า:
+
+- routing ทำงานปกติ
+- tunnel ทำงานสมบูรณ์
+- web access ผ่าน IP44 ใช้งานได้
+
+---
+
+## ทดสอบ watchdog recovery
+
+สามารถทดลอง:
+
+- restart Router
+- restart xl2tpd
+- disconnect Internet ชั่วคราว
+
+จากนั้นตรวจสอบว่า:
+
+- ppp0 กลับมา
+- tunnel reconnect ได้
+- watchdog ทำงานปกติ
+
+---
+
+## สรุป
+
+หากทุกขั้นตอนทำงานปกติ
+ระบบ AMPRNet IP44 ของท่านก็พร้อมใช้งานร่วมกับ:
+
+- AllStarLink 3
+- EchoLink
+- Allmon3
+- remote maintenance ผ่าน IP44
+
+คู่มือชุดนี้พัฒนาจาก workflow ภาคสนามที่ใช้งานจริง
+โดยคงแนวทางเดิมไว้ให้มากที่สุด
+และปรับเฉพาะจุดที่จำเป็นเพื่อให้ง่ายต่อการติดตั้งและดูแลระบบระยะยาว
+
+ขอให้สนุกกับการพัฒนา node และระบบสื่อสารของท่าน
+
+73
+E25LVV
 
