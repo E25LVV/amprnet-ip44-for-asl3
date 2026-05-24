@@ -285,6 +285,77 @@ sudo /usr/local/bin/amprnet-watchdog.sh
 
 ## 6. Configure Systemd Timer
 
+systemd timer จะใช้สำหรับ run watchdog script เป็นระยะ
+เพื่อช่วยตรวจสอบว่า tunnel และ ppp0 ยังทำงานปกติ
+
+สร้าง service file:
+
+```bash
+sudo nano /etc/systemd/system/amprnet-watchdog.service
+```
+
+วางข้อมูลด้านล่าง:
+
+```ini
+[Unit]
+Description=AMPRNet IP44 Watchdog
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/amprnet-watchdog.sh
+```
+
+สร้าง timer file:
+
+```bash
+sudo nano /etc/systemd/system/amprnet-watchdog.timer
+```
+
+วางข้อมูลด้านล่าง:
+
+```ini
+[Unit]
+Description=Run AMPRNet Watchdog Every 1 Minute
+
+[Timer]
+OnBootSec=30
+OnUnitActiveSec=60
+Unit=amprnet-watchdog.service
+
+[Install]
+WantedBy=timers.target
+```
+
+reload systemd:
+
+```bash
+sudo systemctl daemon-reload
+```
+
+enable timer:
+
+```bash
+sudo systemctl enable --now amprnet-watchdog.timer
+```
+
+ตรวจสอบสถานะ timer:
+
+```bash
+systemctl status amprnet-watchdog.timer
+```
+
+ดูรายการ timer ทั้งหมด:
+
+```bash
+systemctl list-timers
+```
+
+หมายเหตุ:
+
+- watchdog จะทำงานทุก 60 วินาที
+- หาก tunnel มีปัญหา ระบบจะพยายาม reconnect อัตโนมัติ
+- ไม่แนะนำให้ตั้ง interval ต่ำเกินไป เพราะอาจทำให้ reconnect ถี่เกินจำเป็น
+
 ## 7. Verification
 
 ## 8. Recovery & Debugging
