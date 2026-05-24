@@ -114,6 +114,27 @@ Router บางรุ่นอาจเรียกชื่อเมนูต�
 
 ## 3. Install Required Packages
 
+เชื่อมต่อ SSH เข้าไปยัง Raspberry Pi หรือระบบ AllStarLink 3 ของท่าน
+จากนั้นอัปเดตระบบและติดตั้ง package ที่จำเป็น
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install strongswan xl2tpd ppp ufw -y
+```
+
+Package ที่ใช้งานในคู่มือชุดนี้:
+
+- strongSwan → ใช้สำหรับสร้าง IPsec tunnel
+- xl2tpd → ใช้สำหรับเชื่อมต่อ L2TP
+- ppp → ใช้สร้าง interface ppp0
+- ufw → ใช้สำหรับจัดการ firewall เบื้องต้น
+
+หมายเหตุ:
+
+- แนะนำให้ reboot หลัง update package จำนวนมาก
+- หากระบบกำลังใช้งาน node จริง ควรทำในช่วงที่ไม่มี QSO
+- บางระบบอาจใช้เวลาติดตั้ง package หลายนาที
+
 ## 4. Create vpn_injector.sh
 
 ## 5. Configure Watchdog
