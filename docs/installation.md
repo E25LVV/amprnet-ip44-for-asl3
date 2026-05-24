@@ -137,6 +137,78 @@ Package ที่ใช้งานในคู่มือชุดนี้:
 
 ## 4. Create vpn_injector.sh
 
+ขั้นตอนนี้จะเป็นการสร้าง script สำหรับ inject ค่า config หลักของระบบ IP44
+
+เริ่มต้นด้วยการสร้างไฟล์:
+
+```bash
+nano vpn_injector.sh
+```
+
+จากนั้นคัดลอก script ด้านล่างไปวางในคราวเดียว
+
+หมายเหตุ:
+
+- แก้ไขเฉพาะ:
+  - VPN_USER
+  - VPN_PASSWORD
+  - YOUR_IP44
+- ไม่แนะนำให้แก้ parameter อื่น หากยังไม่เข้าใจหน้าที่ของแต่ละส่วน
+- Script นี้จะ overwrite config เดิมบางไฟล์ ควรตรวจสอบระบบก่อนใช้งาน
+- ```bash
+#!/bin/bash
+
+# ============================================================
+# E25LVV — AMPRNet IP44 Production Workflow
+# ============================================================
+
+VPN_USER="your-vpn-user"
+VPN_PASSWORD="your-vpn-password"
+YOUR_IP44="44.xx.xx.xx"
+
+# Backup existing configuration
+sudo cp /etc/ipsec.conf /etc/ipsec.conf.bak 2>/dev/null
+sudo cp /etc/ipsec.secrets /etc/ipsec.secrets.bak 2>/dev/null
+sudo cp /etc/xl2tpd/xl2tpd.conf /etc/xl2tpd/xl2tpd.conf.bak 2>/dev/null
+sudo cp /etc/ppp/options.xl2tpd.client /etc/ppp/options.xl2tpd.client.bak 2>/dev/null
+
+# Inject /etc/ipsec.conf
+sudo tee /etc/ipsec.conf > /dev/null <<EOF
+config setup
+    charondebug="ike 1, knl 1, cfg 0"
+
+conn amprnetvpn
+    auto=add
+    keyexchange=ikev1
+    authby=secret
+    type=transport
+    left=%defaultroute
+    leftprotoport=17/1701
+    right=gw01.ham.in.th
+    rightid=81.31.234.70
+    ike=aes128-sha1-modp1024!
+    esp=aes128-sha1!
+EOF
+
+# Inject /etc/ipsec.secrets
+sudo tee /etc/ipsec.secrets > /dev/null <<EOF
+: PSK "dtdxa"
+EOF
+
+# Inject /etc/xl2tpd/xl2tpd.conf
+sudo tee /etc/xl2tpd/xl2tpd.conf > /dev/null <<EOF
+[global]
+port = 1701
+access control = no
+
+[lac amprnetvpn]
+lns = gw01.ham.in.th
+ppp debug = yes
+pppoptfile = /etc/ppp/options.xl2tpd.client
+length bit = yes
+EOF
+```
+
 ## 5. Configure Watchdog
 
 ## 6. Configure Systemd Timer
