@@ -86,6 +86,32 @@ IP44_GATEWAY_INTERNAL="44.32.81.1"
 
 ## 2. Enable IPsec Pass-through on Router
 
+ก่อนเริ่มพิมพ์คำสั่งลงบน Raspberry Pi
+ควรเปิดใช้งาน IPsec Pass-through บน Router อินเทอร์เน็ตบ้านก่อน
+
+Router บางรุ่นอาจเรียกชื่อเมนูต่างกัน เช่น:
+
+- VPN Pass-through
+- IPsec Pass-through
+- VPN Helper
+- ALG Settings
+
+ขั้นตอนทั่วไป:
+
+1. เปิดเว็บเบราว์เซอร์ แล้วเข้าสู่หน้าตั้งค่าของ Router
+2. ไปที่เมนู Security / Firewall / Advanced Settings
+3. มองหาหัวข้อ VPN Pass-through หรือ ALG
+4. เปิดใช้งาน:
+   - IPsec Pass-through
+   - L2TP Pass-through
+5. กดบันทึก (Save) แล้ว reboot Router หากจำเป็น
+
+หมายเหตุ:
+
+- นักวิทยุสมัครเล่นหลายสถานีอาจเปิดใช้งานส่วนนี้ไว้อยู่แล้ว
+- หากไม่ได้เปิด IPsec Pass-through อาจทำให้ tunnel เชื่อมต่อไม่สมบูรณ์
+- บาง Router ต้อง reboot หลังเปลี่ยนค่า
+
 ## 3. Install Required Packages
 
 ## 4. Create vpn_injector.sh
