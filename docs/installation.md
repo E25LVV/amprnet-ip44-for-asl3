@@ -208,6 +208,39 @@ ppp debug = yes
 pppoptfile = /etc/ppp/options.xl2tpd.client
 length bit = yes
 EOF
+# Inject /etc/ppp/options.xl2tpd.client
+sudo tee /etc/ppp/options.xl2tpd.client > /dev/null <<EOF
+ipcp-accept-local
+ipcp-accept-remote
+refuse-eap
+require-chap
+noccp
+noauth
+mtu 1410
+mru 1410
+noipdefault
+defaultroute
+usepeerdns
+connect-delay 5000
+name "$VPN_USER"
+password "$VPN_PASSWORD"
+persist
+maxfail 0
+holdoff 5
+EOF
+
+# Restart services
+sudo systemctl restart strongswan-starter
+sudo systemctl restart xl2tpd
+
+# Enable services at boot
+sudo systemctl enable strongswan-starter
+sudo systemctl enable xl2tpd
+
+echo "=================================================="
+echo "AMPRNet IP44 configuration injected successfully"
+echo "=================================================="
+```
 ```
 
 ## 5. Configure Watchdog
