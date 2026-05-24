@@ -358,6 +358,112 @@ systemctl list-timers
 
 ## 7. Verification
 
+หลังติดตั้งเสร็จ ควรตรวจสอบว่า:
+
+- IPsec tunnel ทำงาน
+- ppp0 ถูกสร้าง
+- route ถูก inject
+- watchdog ทำงานปกติ
+
+---
+
+## ตรวจสอบ IPsec status
+
+```bash
+sudo ipsec status
+```
+
+ควรเห็น:
+
+```text
+ESTABLISHED
+```
+
+---
+
+## ตรวจสอบ interface ppp0
+
+```bash
+ip a
+```
+
+ควรเห็น interface:
+
+```text
+ppp0
+```
+
+---
+
+## ตรวจสอบ routing table
+
+```bash
+ip route
+```
+
+ตรวจสอบว่า route ของ IP44 ถูกสร้างแล้ว
+
+---
+
+## ทดสอบ ping gateway
+
+```bash
+ping 44.32.81.1
+```
+
+หาก tunnel ปกติ ควร reply ได้
+
+---
+
+## ทดสอบ ping ออก Internet ผ่าน tunnel
+
+```bash
+ping 44.0.0.1
+```
+
+---
+
+## ตรวจสอบ watchdog timer
+
+```bash
+systemctl status amprnet-watchdog.timer
+```
+
+ควรเห็น:
+
+```text
+active (waiting)
+```
+
+---
+
+## ตรวจสอบ watchdog log
+
+```bash
+journalctl -u amprnet-watchdog.service -n 20
+```
+
+---
+
+## ตรวจสอบ xl2tpd log
+
+```bash
+journalctl -u xl2tpd -n 50
+```
+
+---
+
+## ตรวจสอบ strongSwan log
+
+```bash
+journalctl -u strongswan-starter -n 50
+```
+
+หมายเหตุ:
+
+- บางระบบอาจใช้เวลา 10-30 วินาที กว่า ppp0 จะขึ้น
+- หาก reboot Router tunnel อาจ reconnect ช้าชั่วคราว
+- ช่วงแรกหลังติดตั้ง แนะนำให้ monitor log ระยะหนึ่งก่อนใช้งานจริง
 ## 8. Recovery & Debugging
 
 ## 9. Final Testing
