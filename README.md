@@ -8,31 +8,22 @@ Production-oriented AMPRNet IP44 deployment guide for AllStarLink 3.
 
 ## Project Philosophy
 
-คู่มือนี้เกิดจากการลองใช้งานจริงบน AllStarLink 3
-
-แนวคิดหลัก:
-- ใช้งานจริงได้
-- reboot แล้วระบบกลับมาทำงานเอง
-- มือใหม่ทำตามได้
-- ลดปัญหาจุกจิกที่มักเจอเวลาใช้งานจริง
-
-> "ไม่ใช่แค่ติดตั้งได้ แต่ต้องใช้งานจริงได้อย่างเสถียร"
-
+- Field-tested workflow  
+  ผ่านการทดสอบใช้งานจริง
+- Stable after reboot  
+  reboot แล้วระบบกลับมาทำงานได้เอง
+- Beginner-friendly deployment  
+  มือใหม่ทำตามได้จริง
+- Recovery-aware operation    
+  คำนึงถึงการกู้ระบบเมื่อเกิดปัญหา
+- Minimal human error    
+  ลดความผิดพลาดจากการตั้งค่าด้วยมือ
 
 ---
 
 ## Why This Project Exists
 
-หลายคนติดตั้ง AMPRNet ได้
-แต่พอ reboot แล้วระบบไม่กลับมาทำงานเอง
-
-บางเครื่อง SSH เข้าไม่ได้หลัง reboot
-บางเครื่องเน็ตมีปัญหาหลังติดตั้ง
-บางเครื่องเข้า 44net ไม่ได้
-
-คู่มือนี้จึงรวบรวมวิธีที่ทดลองใช้งานจริง
-เพื่อช่วยให้เพื่อนนักวิทยุสมัครเล่นใช้งานได้ง่ายขึ้นและต่อเนื่องมากขึ้น
-
+This project provides a practical and field-tested AMPRNet IP44 workflow for AllStarLink 3 focused on stable reboot behavior and long-term operation.
 
 ---
 
@@ -58,31 +49,12 @@ Production-oriented AMPRNet IP44 deployment guide for AllStarLink 3.
 
 ---
 
-## Field-Tested Notes
-
-จากการทดสอบบน 416005 และ 602141 พบว่า
-
-- reboot ครั้งแรก อาจต้องรอประมาณ 30-60 วินาที
-- บางช่วง SSH อาจค้างสั้นๆ ระหว่างปรับ network
-- browser บางตัวอาจต้อง refresh ใหม่หลังติดตั้ง
-- reboot แล้วระบบ reconnect กลับมาได้ปกติ
-- AllStarLink ยังทำงานได้ตามปกติหลังติดตั้ง
-
-ทดสอบใช้งานจริงบน
-
-- Node 416005 / 602141
-- HUB 64677 / 416000
-
----
-
 ## Installation
 
 ก่อนเริ่ม แนะนำให้ตรวจดังนี้:
 
 - เครื่องยังออกเน็ตได้ปกติ
 - ยัง SSH เข้าเครื่องได้ปกติ
-- ควร backup node ก่อน
-- ถ้าอยู่ไกล ควรมีวิธีเข้าเครื่องสำรองไว้
 
 ดาวน์โหลด repository:
 
