@@ -1,6 +1,6 @@
 # AMPRNet IP44 Production Installation Guide
 
-Field-tested workflow for:
+Field-tested workflow for
 
 - Debian 12
 - AllStarLink 3
@@ -69,7 +69,7 @@ VPN_PASSWORD="MySecretPass123"
 YOUR_IP44="44.32.81.xx"
 ```
 
-ข้อมูลส่วนกลางของระบบ:
+ข้อมูลส่วนกลางของระบบ
 
 ```bash
 GATEWAY_HOST="gw01.ham.in.th"
@@ -96,7 +96,7 @@ Router บางรุ่นอาจเรียกชื่อเมนูต�
 - VPN Helper
 - ALG Settings
 
-ขั้นตอนทั่วไป:
+ขั้นตอนทั่วไป
 
 1. เปิดเว็บเบราว์เซอร์ แล้วเข้าสู่หน้าตั้งค่าของ Router
 2. ไปที่เมนู Security / Firewall / Advanced Settings
@@ -122,14 +122,14 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install strongswan xl2tpd ppp ufw -y
 ```
 
-Package ที่ใช้งานในคู่มือชุดนี้:
+Package ที่ใช้งานในคู่มือชุดนี้
 
 - strongSwan → ใช้สำหรับสร้าง IPsec tunnel
 - xl2tpd → ใช้สำหรับเชื่อมต่อ L2TP
 - ppp → ใช้สร้าง interface ppp0
 - ufw → ใช้สำหรับจัดการ firewall เบื้องต้น
 
-หมายเหตุ:
+หมายเหตุ
 
 - แนะนำให้ reboot หลัง update package จำนวนมาก
 - หากระบบกำลังใช้งาน node จริง ควรทำในช่วงที่ไม่มี QSO
@@ -139,7 +139,7 @@ Package ที่ใช้งานในคู่มือชุดนี้:
 
 ขั้นตอนนี้จะเป็นการสร้าง script สำหรับ inject ค่า config หลักของระบบ IP44
 
-เริ่มต้นด้วยการสร้างไฟล์:
+เริ่มต้นด้วยการสร้างไฟล์
 
 ```bash
 nano vpn_injector.sh
@@ -149,7 +149,7 @@ nano vpn_injector.sh
 
 หมายเหตุ:
 
-- แก้ไขเฉพาะ:
+- แก้ไขเฉพาะ
   - VPN_USER
   - VPN_PASSWORD
   - YOUR_IP44
@@ -247,7 +247,7 @@ echo "=================================================="
 
 watchdog script ใช้สำหรับตรวจสอบว่า tunnel และ ppp0 ยังทำงานปกติหรือไม่
 
-หากระบบตรวจพบว่า:
+หากระบบตรวจพบว่า
 
 - ppp0 หาย
 - ping gateway ไม่ได้
@@ -256,7 +256,7 @@ watchdog script ใช้สำหรับตรวจสอบว่า tunnel
 
 ระบบจะพยายาม reconnect อัตโนมัติ
 
-เริ่มต้นด้วยการดาวน์โหลด watchdog script:
+เริ่มต้นด้วยการดาวน์โหลด watchdog script
 
 ```bash
 cd /usr/local/bin
@@ -265,19 +265,19 @@ sudo wget -O amprnet-watchdog.sh \
 https://raw.githubusercontent.com/E25LVV/amprnet-ip44-for-asl3/main/scripts/amprnet-watchdog.sh
 ```
 
-กำหนด permission:
+กำหนด permission
 
 ```bash
 sudo chmod +x /usr/local/bin/amprnet-watchdog.sh
 ```
 
-ทดสอบ run script ด้วยตนเอง:
+ทดสอบ run script ด้วยตนเอง
 
 ```bash
 sudo /usr/local/bin/amprnet-watchdog.sh
 ```
 
-หมายเหตุ:
+หมายเหตุ
 
 - script จะ reconnect tunnel อัตโนมัติเมื่อพบปัญหา
 - หากใช้งานร่วมกับ EchoLink หรือ AllStarLink bridge แนะนำให้ monitor ช่วงแรกหลังติดตั้ง
@@ -294,7 +294,7 @@ systemd timer จะใช้สำหรับ run watchdog script เป็น
 sudo nano /etc/systemd/system/amprnet-watchdog.service
 ```
 
-วางข้อมูลด้านล่าง:
+วางข้อมูลด้านล่าง
 
 ```ini
 [Unit]
@@ -344,13 +344,13 @@ sudo systemctl enable --now amprnet-watchdog.timer
 systemctl status amprnet-watchdog.timer
 ```
 
-ดูรายการ timer ทั้งหมด:
+ดูรายการ timer ทั้งหมด
 
 ```bash
 systemctl list-timers
 ```
 
-หมายเหตุ:
+หมายเหตุ
 
 - watchdog จะทำงานทุก 60 วินาที
 - หาก tunnel มีปัญหา ระบบจะพยายาม reconnect อัตโนมัติ
@@ -358,7 +358,7 @@ systemctl list-timers
 
 ## 7. Verification
 
-หลังติดตั้งเสร็จ ควรตรวจสอบว่า:
+หลังติดตั้งเสร็จ ควรตรวจสอบว่า
 
 - IPsec tunnel ทำงาน
 - ppp0 ถูกสร้าง
@@ -418,7 +418,7 @@ ping 44.32.81.1
 ## ทดสอบ ping ออก Internet ผ่าน tunnel
 
 ```bash
-ping 44.0.0.1
+ping 44.32.81.1
 ```
 
 ---
@@ -459,7 +459,7 @@ journalctl -u xl2tpd -n 50
 journalctl -u strongswan-starter -n 50
 ```
 
-หมายเหตุ:
+หมายเหตุ
 
 - บางระบบอาจใช้เวลา 10-30 วินาที กว่า ppp0 จะขึ้น
 - หาก reboot Router tunnel อาจ reconnect ช้าชั่วคราว
@@ -573,12 +573,12 @@ sudo systemctl restart xl2tpd
 
 หลีกเลี่ยงการเปลี่ยน default route ของระบบ
 
-คู่มือชุดนี้ออกแบบให้:
+คู่มือชุดนี้ออกแบบให้
 
 - internet ปกติ วิ่งออก gateway เดิม
-- traffic IP44 วิ่งผ่าน ppp0
+- traffic AMPRNet/IP44 วิ่งผ่าน ppp0
 
-หากเปลี่ยน default route อาจทำให้:
+หากเปลี่ยน default route อาจทำให้
 
 - SSH หลุด
 - Allmon3 เข้าไม่ได้
@@ -607,7 +607,7 @@ watchdog:
 journalctl -fu amprnet-watchdog.service
 ```
 
-หมายเหตุ:
+หมายเหตุ
 
 - บาง Router จะ reconnect tunnel ช้าหลัง reboot
 - ISP บางรายอาจ block หรือ delay IPsec traffic
@@ -626,7 +626,7 @@ journalctl -fu amprnet-watchdog.service
 เปิดโปรแกรม SSH เช่น PuTTY
 แล้วเชื่อมต่อไปยังหมายเลข IP44 ของ node
 
-ตัวอย่าง:
+ตัวอย่าง
 
 ```text
 44.xx.xx.xx
@@ -640,13 +640,13 @@ journalctl -fu amprnet-watchdog.service
 ## ทดสอบ Internet จากภายใน tunnel
 
 หลัง login ผ่าน IP44 แล้ว
-ลองทดสอบ:
+ลองทดสอบ
 
 ```bash
 ping google.com
 ```
 
-และ:
+และ
 
 ```bash
 curl ifconfig.me
@@ -656,13 +656,13 @@ curl ifconfig.me
 
 ## ทดสอบ Allmon3
 
-เปิดเว็บเบราว์เซอร์ แล้วเข้า:
+เปิดเว็บเบราว์เซอร์ แล้วเข้า
 
 ```text
 http://YOUR-IP44-ADDRESS
 ```
 
-ตัวอย่าง:
+ตัวอย่าง
 
 ```text
 http://44.xx.xx.xx
@@ -679,13 +679,15 @@ http://44.xx.xx.xx
 
 ## ทดสอบ watchdog recovery
 
-สามารถทดลอง:
+สามารถทดลอง
 
 - restart Router
 - restart xl2tpd
 - disconnect Internet ชั่วคราว
+หลัง reconnect อาจใช้เวลาประมาณ 10-30 วินาที
+ขึ้นอยู่กับ Router และ ISP
 
-จากนั้นตรวจสอบว่า:
+จากนั้นตรวจสอบว่า
 
 - ppp0 กลับมา
 - tunnel reconnect ได้
