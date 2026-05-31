@@ -18,17 +18,15 @@ Field-tested workflow for
 แนวทางชุดนี้พัฒนาจากการทดลองใช้งานจริง
 รวมถึงการแก้ปัญหาในสภาพแวดล้อมจริง เช่น
 
-- one-way audio
 - route พังหลัง reboot
 - ppp0 ไม่ reconnect
 - VPN ค้าง
 - Allmon3 เข้าไม่ได้
 - SSH หลุดหลังเชื่อมต่อ IP44
 
-คู่มือชุดนี้ยังคง workflow เดิมที่เผยแพร่ก่อนหน้าไว้ให้มากที่สุด
-เพื่อให้ผู้ที่เคยใช้งานสามารถต่อยอดและ troubleshooting ได้ต่อเนื่อง
+คู่มือชุดนี้ยังคง workflow เดิมที่เผยแพร่ก่อนหน้าไว้ให้มากที่สุด เพื่อให้ผู้ที่เคยใช้งานสามารถต่อยอดและแก้ไขปัญหาได้ต่อเนื่อง
 
-ระบบนี้ออกแบบมาสำหรับ:
+ระบบนี้ออกแบบมาสำหรับ
 
 - Raspberry Pi
 - Debian 12/13
@@ -36,14 +34,23 @@ Field-tested workflow for
 - Home NAT Internet
 - IPsec/L2TP AMPRNet topology
 
-Known limitations:
+Known limitations
 
 - ยังไม่รองรับ Docker
 - ยังไม่เหมาะกับ CGNAT ISP
 - ยังไม่รองรับ Dual WAN
-- Mikrotik FastTrack อาจทำให้ tunnel มีปัญหา
+- Mikrotik FastTrack อาจทำให้การเชื่อมต่อมีปัญหา
 - OpenWRT policy routing ขั้นสูง อาจต้องปรับเพิ่มเติม
 
+## Reference
+
+คู่มือชุดนี้พัฒนาต่อยอดจาก workflow ภาคสนามฉบับก่อนหน้า
+โดยปรับปรุงให้เหมาะกับการใช้งานจริงระยะยาวบน AllStarLink 3 และ Raspberry Pi มากขึ้น
+
+ผู้ที่ต้องการศึกษาที่มาของ workflow เดิม หรือแนวทางก่อนการปรับปรุงเพิ่มเติม
+สามารถอ่านคู่มือเวอร์ชันก่อนหน้าได้ที่
+
+https://medium.com/@asl.e25lvv/%E0%B8%84%E0%B8%B9%E0%B9%88%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%AA%E0%B8%99%E0%B8%B2%E0%B8%A1-v-3-amprnet-ip44-production-manual-f3ef2060c300
 
 
 ## 1. Prepare Required Information
@@ -78,7 +85,7 @@ IPSEC_KEY="dtdxa"
 IP44_GATEWAY_INTERNAL="44.32.81.1"
 ```
 
-หมายเหตุ:
+หมายเหตุ
 
 - ควรตรวจสอบหมายเลข IP44 ให้ถูกต้องก่อนเริ่มติดตั้ง
 - แนะนำให้บันทึกข้อมูลไว้ก่อน reboot หรือปรับแต่งระบบ
@@ -89,7 +96,7 @@ IP44_GATEWAY_INTERNAL="44.32.81.1"
 ก่อนเริ่มพิมพ์คำสั่งลงบน Raspberry Pi
 ควรเปิดใช้งาน IPsec Pass-through บน Router อินเทอร์เน็ตบ้านก่อน
 
-Router บางรุ่นอาจเรียกชื่อเมนูต่างกัน เช่น:
+Router บางรุ่นอาจเรียกชื่อเมนูต่างกัน เช่น
 
 - VPN Pass-through
 - IPsec Pass-through
@@ -106,15 +113,15 @@ Router บางรุ่นอาจเรียกชื่อเมนูต�
    - L2TP Pass-through
 5. กดบันทึก (Save) แล้ว reboot Router หากจำเป็น
 
-หมายเหตุ:
+หมายเหตุ
 
 - นักวิทยุสมัครเล่นหลายสถานีอาจเปิดใช้งานส่วนนี้ไว้อยู่แล้ว
-- หากไม่ได้เปิด IPsec Pass-through อาจทำให้ tunnel เชื่อมต่อไม่สมบูรณ์
+- หากไม่ได้เปิด IPsec Pass-through อาจทำให้ช่องทางเชื่อมต่อไม่สมบูรณ์
 - บาง Router ต้อง reboot หลังเปลี่ยนค่า
 
 ## 3. Install Required Packages
 
-เชื่อมต่อ SSH เข้าไปยัง Raspberry Pi หรือระบบ AllStarLink 3 ของท่าน
+เชื่อมต่อ SSH เข้าไปยัง Raspberry Pi หรือระบบ AllStarLink 3 ของเพื่อนๆ
 จากนั้นอัปเดตระบบและติดตั้ง package ที่จำเป็น
 
 ```bash
@@ -132,7 +139,7 @@ Package ที่ใช้งานในคู่มือชุดนี้
 หมายเหตุ
 
 - แนะนำให้ reboot หลัง update package จำนวนมาก
-- หากระบบกำลังใช้งาน node จริง ควรทำในช่วงที่ไม่มี QSO
+- หากระบบกำลังใช้งาน node จริง ควร Disconnect จากโหนดหลักก่อนดำเนินการ
 - บางระบบอาจใช้เวลาติดตั้ง package หลายนาที
 
 ## 4. Create vpn_injector.sh
@@ -147,13 +154,13 @@ nano vpn_injector.sh
 
 จากนั้นคัดลอก script ด้านล่างไปวางในคราวเดียว
 
-หมายเหตุ:
+หมายเหตุ
 
 - แก้ไขเฉพาะ
   - VPN_USER
   - VPN_PASSWORD
   - YOUR_IP44
-- ไม่แนะนำให้แก้ parameter อื่น หากยังไม่เข้าใจหน้าที่ของแต่ละส่วน
+- ไม่แนะนำให้แก้ส่วนอื่นๆหากยังไม่เข้าใจหน้าที่ของแต่ละส่วน
 - Script นี้จะ overwrite config เดิมบางไฟล์ ควรตรวจสอบระบบก่อนใช้งาน
 
 ```bash
@@ -279,16 +286,16 @@ sudo /usr/local/bin/amprnet-watchdog.sh
 
 หมายเหตุ
 
-- script จะ reconnect tunnel อัตโนมัติเมื่อพบปัญหา
+- script จะ reconnect ช่องทางเชื่อมต่ออัตโนมัติเมื่อพบปัญหา
 - หากใช้งานร่วมกับ EchoLink หรือ AllStarLink bridge แนะนำให้ monitor ช่วงแรกหลังติดตั้ง
 - หาก Router reboot บ่อย อาจทำให้ tunnel reconnect ใช้เวลานานขึ้น
 
 ## 6. Configure Systemd Timer
 
 systemd timer จะใช้สำหรับ run watchdog script เป็นระยะ
-เพื่อช่วยตรวจสอบว่า tunnel และ ppp0 ยังทำงานปกติ
+เพื่อช่วยตรวจสอบว่าการเชื่อมต่อและ ppp0 ยังทำงานปกติ
 
-สร้าง service file:
+สร้าง service file
 
 ```bash
 sudo nano /etc/systemd/system/amprnet-watchdog.service
@@ -305,13 +312,13 @@ Type=oneshot
 ExecStart=/usr/local/bin/amprnet-watchdog.sh
 ```
 
-สร้าง timer file:
+สร้าง timer file
 
 ```bash
 sudo nano /etc/systemd/system/amprnet-watchdog.timer
 ```
 
-วางข้อมูลด้านล่าง:
+วางข้อมูลด้านล่าง
 
 ```ini
 [Unit]
@@ -326,19 +333,19 @@ Unit=amprnet-watchdog.service
 WantedBy=timers.target
 ```
 
-reload systemd:
+reload systemd
 
 ```bash
 sudo systemctl daemon-reload
 ```
 
-enable timer:
+enable timer
 
 ```bash
 sudo systemctl enable --now amprnet-watchdog.timer
 ```
 
-ตรวจสอบสถานะ timer:
+ตรวจสอบสถานะ timer
 
 ```bash
 systemctl status amprnet-watchdog.timer
@@ -353,7 +360,7 @@ systemctl list-timers
 หมายเหตุ
 
 - watchdog จะทำงานทุก 60 วินาที
-- หาก tunnel มีปัญหา ระบบจะพยายาม reconnect อัตโนมัติ
+- หากช่องทางเชื่อมต่อมีปัญหา ระบบจะพยายาม reconnect อัตโนมัติ
 - ไม่แนะนำให้ตั้ง interval ต่ำเกินไป เพราะอาจทำให้ reconnect ถี่เกินจำเป็น
 
 ## 7. Verification
@@ -373,7 +380,7 @@ systemctl list-timers
 sudo ipsec status
 ```
 
-ควรเห็น:
+ควรเห็น
 
 ```text
 ESTABLISHED
@@ -411,11 +418,11 @@ ip route
 ping 44.32.81.1
 ```
 
-หาก tunnel ปกติ ควร reply ได้
+หากการเชื่อมต่อปกติ ควร reply ได้
 
 ---
 
-## ทดสอบ ping ออก Internet ผ่าน tunnel
+## ทดสอบ ping ออก Internet ผ่าน IP44 tunnel
 
 ```bash
 ping 44.32.81.1
@@ -429,7 +436,7 @@ ping 44.32.81.1
 systemctl status amprnet-watchdog.timer
 ```
 
-ควรเห็น:
+ควรเห็น
 
 ```text
 active (waiting)
@@ -462,30 +469,31 @@ journalctl -u strongswan-starter -n 50
 หมายเหตุ
 
 - บางระบบอาจใช้เวลา 10-30 วินาที กว่า ppp0 จะขึ้น
-- หาก reboot Router tunnel อาจ reconnect ช้าชั่วคราว
+- หาก reboot Router อาจ reconnect ช้าชั่วคราว
 - ช่วงแรกหลังติดตั้ง แนะนำให้ monitor log ระยะหนึ่งก่อนใช้งานจริง
+  
 ## 8. Recovery & Debugging
 
-หาก tunnel ไม่ทำงาน หรือ ppp0 ไม่ขึ้น
+หากช่องทางเชื่อมต่อไม่ทำงาน หรือ ppp0 ไม่ขึ้น
 สามารถตรวจสอบตามอาการด้านล่างนี้ได้
 
 ---
 
 ## กรณี ppp0 ไม่ถูกสร้าง
 
-ตรวจสอบ service:
+ตรวจสอบ service
 
 ```bash
 sudo systemctl status xl2tpd
 ```
 
-ลอง restart:
+ลอง restart
 
 ```bash
 sudo systemctl restart xl2tpd
 ```
 
-จากนั้นตรวจสอบอีกครั้ง:
+จากนั้นตรวจสอบอีกครั้ง
 
 ```bash
 ip a
@@ -493,21 +501,21 @@ ip a
 
 ---
 
-## กรณี tunnel ไม่ ESTABLISHED
+## กรณีการเชื่อมต่อไม่ ESTABLISHED
 
-ตรวจสอบ IPsec status:
+ตรวจสอบ IPsec status
 
 ```bash
 sudo ipsec status
 ```
 
-ลอง restart strongSwan:
+ลอง restart strongSwan
 
 ```bash
 sudo systemctl restart strongswan-starter
 ```
 
-ตรวจสอบ log:
+ตรวจสอบ log
 
 ```bash
 journalctl -u strongswan-starter -n 50
@@ -517,13 +525,13 @@ journalctl -u strongswan-starter -n 50
 
 ## กรณี ping gateway ไม่ได้
 
-ตรวจสอบ:
+ตรวจสอบ
 
 ```bash
 ip route
 ```
 
-และ:
+และ
 
 ```bash
 ip a
@@ -536,19 +544,19 @@ ip a
 
 ## กรณี watchdog reconnect ไม่ทำงาน
 
-ทดสอบ run script ด้วยตนเอง:
+ทดสอบ run script ด้วยตนเอง
 
 ```bash
 sudo /usr/local/bin/amprnet-watchdog.sh
 ```
 
-ตรวจสอบ timer:
+ตรวจสอบ timer
 
 ```bash
 systemctl status amprnet-watchdog.timer
 ```
 
-ตรวจสอบ log:
+ตรวจสอบ log
 
 ```bash
 journalctl -u amprnet-watchdog.service -n 20
@@ -558,7 +566,7 @@ journalctl -u amprnet-watchdog.service -n 20
 
 ## กรณี reboot แล้ว tunnel ไม่กลับมา
 
-ลอง restart service:
+ลอง restart service
 
 ```bash
 sudo systemctl restart strongswan-starter
@@ -583,25 +591,25 @@ sudo systemctl restart xl2tpd
 - SSH หลุด
 - Allmon3 เข้าไม่ได้
 - เกิด one-way audio
-- tunnel reconnect ผิดเส้นทาง
+- การเชื่อมต่อเมื่อ reconnect ผิดเส้นทาง
 
 ---
 
 ## ดู log แบบ realtime
 
-xl2tpd:
+xl2tpd
 
 ```bash
 journalctl -fu xl2tpd
 ```
 
-strongSwan:
+strongSwan
 
 ```bash
 journalctl -fu strongswan-starter
 ```
 
-watchdog:
+watchdog
 
 ```bash
 journalctl -fu amprnet-watchdog.service
@@ -612,7 +620,7 @@ journalctl -fu amprnet-watchdog.service
 - บาง Router จะ reconnect tunnel ช้าหลัง reboot
 - ISP บางรายอาจ block หรือ delay IPsec traffic
 - หากใช้งาน CGNAT tunnel อาจไม่เสถียร
-- หาก tunnel reconnect บ่อย ควรตรวจสอบ Router และ Internet stability ก่อน
+- หาก reconnect การเชื่อมต่อบ่อย ควรตรวจสอบ Router และ Internet stability ก่อน
   
 ## 9. Final Testing
 
@@ -633,11 +641,11 @@ journalctl -fu amprnet-watchdog.service
 ```
 
 หากเชื่อมต่อได้
-แสดงว่า tunnel และ routing ทำงานปกติ
+แสดงว่าช่องทางเชื่อมต่อทำงานปกติ
 
 ---
 
-## ทดสอบ Internet จากภายใน tunnel
+## ทดสอบ Internet จากภายใน IP44 tunnel
 
 หลัง login ผ่าน IP44 แล้ว
 ลองทดสอบ
@@ -669,10 +677,10 @@ http://44.xx.xx.xx
 ```
 
 หากสามารถ login และดูสถานะ node ได้
-แสดงว่า:
+แสดงว่า
 
 - routing ทำงานปกติ
-- tunnel ทำงานสมบูรณ์
+- ช่องทางเชื่อมต่อทำงานสมบูรณ์
 - web access ผ่าน IP44 ใช้งานได้
 
 ---
@@ -690,7 +698,7 @@ http://44.xx.xx.xx
 จากนั้นตรวจสอบว่า
 
 - ppp0 กลับมา
-- tunnel reconnect ได้
+- การเชื่อมต่อกลับมาได้
 - watchdog ทำงานปกติ
 
 ---
@@ -698,7 +706,7 @@ http://44.xx.xx.xx
 ## สรุป
 
 หากทุกขั้นตอนทำงานปกติ
-ระบบ AMPRNet IP44 ของท่านก็พร้อมใช้งานร่วมกับ:
+ระบบ AMPRNet IP44 ของเพื่อนๆก็พร้อมใช้งานร่วมกับ
 
 - AllStarLink 3
 - EchoLink
