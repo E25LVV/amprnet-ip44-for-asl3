@@ -61,3 +61,31 @@ This project provides a practical and field-tested AMPRNet IP44 workflow for All
 ```bash
 git clone https://github.com/E25LVV/amprnet-ip44-for-asl3.git
 cd amprnet-ip44-for-asl3
+
+
+---
+
+```
+# Operational Tools
+
+## amprnet-start.sh
+
+ใช้สำหรับเริ่มต้น AMPRNet workflow แบบมาตรฐาน
+
+Download:
+
+```bash id="f6m2xp"
+wget -O /usr/local/bin/amprnet-start.sh https://raw.githubusercontent.com/E25LVV/amprnet-ip44-for-asl3/main/tools/amprnet-start.sh
+```
+
+กำหนดสิทธิ์ execute:
+
+```bash id="q7v4mk"
+chmod +x /usr/local/bin/amprnet-start.sh
+```
+
+วิธีใช้งาน:
+
+```bash id="m3x8vr"
+/usr/local/bin/amprnet-start.sh
+```
