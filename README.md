@@ -56,16 +56,14 @@ This project provides a practical and field-tested AMPRNet IP44 workflow for All
 - เครื่องยังออกเน็ตได้ปกติ
 - ยัง SSH เข้าเครื่องได้ปกติ
 
-ดาวน์โหลด repository:
+ดาวน์โหลดคู่มือ:
 
 ```bash
 git clone https://github.com/E25LVV/amprnet-ip44-for-asl3.git
 cd amprnet-ip44-for-asl3
 
-
----
-
 ```
+ใช้สำหรับเปิดดูไฟล์คู่มือและ workflow ต่างๆใน repo นี้
 
 # Operational Workflow
 
