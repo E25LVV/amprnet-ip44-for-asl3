@@ -89,3 +89,48 @@ chmod +x /usr/local/bin/amprnet-start.sh
 ```bash id="m3x8vr"
 /usr/local/bin/amprnet-start.sh
 ```
+## amprnet-stop.sh
+
+ใช้สำหรับ shutdown AMPRNet workflow แบบมาตรฐาน
+
+Download:
+
+```bash id="w7v2pk"
+wget -O /usr/local/bin/amprnet-stop.sh https://raw.githubusercontent.com/E25LVV/amprnet-ip44-for-asl3/main/tools/amprnet-stop.sh
+```
+
+กำหนดสิทธิ์ execute:
+
+```bash id="x5m8vr"
+chmod +x /usr/local/bin/amprnet-stop.sh
+```
+
+วิธีใช้งาน:
+
+```bash id="q3n7xc"
+/usr/local/bin/amprnet-stop.sh
+```
+
+---
+
+## amprnet-status.sh
+
+ใช้ตรวจสอบสถานะ AMPRNet แบบรวมในจุดเดียว
+
+Download:
+
+```bash id="n8v4mk"
+wget -O /usr/local/bin/amprnet-status.sh https://raw.githubusercontent.com/E25LVV/amprnet-ip44-for-asl3/main/tools/amprnet-status.sh
+```
+
+กำหนดสิทธิ์ execute:
+
+```bash id="m2x5vp"
+chmod +x /usr/local/bin/amprnet-status.sh
+```
+
+วิธีใช้งาน:
+
+```bash id="p6v8zr"
+/usr/local/bin/amprnet-status.sh
+```
