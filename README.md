@@ -66,6 +66,49 @@ cd amprnet-ip44-for-asl3
 ---
 
 ```
+
+# Operational Workflow
+
+ลำดับการใช้งานแบบปลอดภัย
+
+## 1. Start AMPRNet
+
+เริ่มต้น AMPRNet tunnel และ policy routing
+
+```bash
+/usr/local/bin/amprnet-start.sh
+```
+
+---
+
+## 2. Check Status
+
+ตรวจสอบสถานะระบบ
+
+```bash
+/usr/local/bin/amprnet-status.sh
+```
+
+---
+
+## 3. Stop AMPRNet
+
+ใช้เมื่อต้องการ shutdown AMPRNet workflow
+
+```bash
+/usr/local/bin/amprnet-stop.sh
+```
+
+---
+
+## แนวทางนี้ช่วยให้
+
+* start/stop ระบบเป็นลำดับเดียวกันทุกครั้ง
+* ลดปัญหา route ค้าง
+* ตรวจสอบระบบได้ง่ายขึ้น
+* debug ระบบได้ง่ายขึ้น
+
+
 # Operational Tools
 
 ## amprnet-start.sh
