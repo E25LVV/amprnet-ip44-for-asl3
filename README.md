@@ -20,6 +20,21 @@ Production-oriented AMPRNet IP44 deployment guide for AllStarLink 3.
   ลดความผิดพลาดจากการตั้งค่าด้วยมือ
 
 ---
+## Validation Environment
+
+This project has been tested on:
+
+* ASL3 Debian 12
+* ASL3 Debian 13
+* Real-world validation on Node 602141
+* Production-style deployment testing completed
+
+คู่มือนี้ผ่านการทดสอบใช้งานจริงบนระบบ AllStarLink 3 ทั้ง Debian 12 และ Debian 13
+รวมถึงมีการ validate workflow จริงบน Node 602141 ในสภาพแวดล้อมการใช้งานจริง
+
+แนวทางทั้งหมดใน repository นี้พัฒนาจากประสบการณ์ใช้งานจริง การเรียนรู้ และการทดลองในระบบจริง 
+เพื่อช่วยให้เพื่อนๆนักวิทยุสมัครเล่นสามารถติดตั้งและเรียนรู้ได้ง่ายขึ้น 
+ลดความสับสนและสามารถตรวจสอบหรือย้อนกลับการแก้ไขได้ในกรณีที่เกิดปัญหา
 
 ## Why This Project Exists
 
