@@ -2,7 +2,7 @@
 
 Production-oriented AMPRNet IP44 deployment guide for AllStarLink 3.
 
-คู่มือสำหรับเพื่อนนักวิทยุสมัครเล่นที่ต้องการใช้งาน AMPRNet IP44 บน AllStarLink 3 แบบใช้งานจริง
+คู่มือสำหรับเพื่อนนักวิทยุสมัครเล่นที่ต้องการใช้งาน AMPRNet IP44 บน AllStarLink 3
 
 ---
 
@@ -15,7 +15,7 @@ Production-oriented AMPRNet IP44 deployment guide for AllStarLink 3.
 - Beginner-friendly deployment  
   มือใหม่ทำตามได้จริง
 - Recovery-aware operation    
-  คำนึงถึงการกู้ระบบเมื่อเกิดปัญหา
+  ให้ความสำคัญกับการกู้ระบบเมื่อเกิดปัญหา
 - Minimal human error    
   ลดความผิดพลาดจากการตั้งค่าด้วยมือ
 
@@ -32,9 +32,9 @@ This project provides a practical and field-tested AMPRNet IP44 workflow for All
 ระบบนี้เหมาะสำหรับ
 
 - เพื่อนนักวิทยุสมัครเล่นที่เริ่มใช้งาน AMPRNet
-- คนที่ต้องการให้ reboot แล้วระบบกลับมาทำงานเอง
+- ต้องการให้ reboot แล้วระบบกลับมาทำงานเอง
 - Node ที่ต้องการใช้งานต่อเนื่อง
-- คนที่ต้องการ workflow แบบเรียบง่าย ไม่ซับซ้อน
+- เพื่อนๆที่ต้องการ workflow แบบเรียบง่าย ไม่ซับซ้อน
 
 
 ## Tested Environment
@@ -51,12 +51,12 @@ This project provides a practical and field-tested AMPRNet IP44 workflow for All
 
 ## Installation
 
-ก่อนเริ่ม แนะนำให้ตรวจดังนี้:
+ก่อนเริ่ม แนะนำให้ตรวจดังนี้
 
 - เครื่องยังออกเน็ตได้ปกติ
 - ยัง SSH เข้าเครื่องได้ปกติ
 
-ดาวน์โหลดคู่มือ:
+ดาวน์โหลดคู่มือ
 
 ```bash
 git clone https://github.com/E25LVV/amprnet-ip44-for-asl3.git
@@ -113,19 +113,19 @@ cd amprnet-ip44-for-asl3
 
 ใช้สำหรับเริ่มต้น AMPRNet workflow แบบมาตรฐาน
 
-Download:
+Download
 
 ```bash id="f6m2xp"
 wget -O /usr/local/bin/amprnet-start.sh https://raw.githubusercontent.com/E25LVV/amprnet-ip44-for-asl3/main/tools/amprnet-start.sh
 ```
 
-กำหนดสิทธิ์ execute:
+กำหนดสิทธิ์ execute
 
 ```bash id="q7v4mk"
 chmod +x /usr/local/bin/amprnet-start.sh
 ```
 
-วิธีใช้งาน:
+วิธีใช้งาน
 
 ```bash id="m3x8vr"
 /usr/local/bin/amprnet-start.sh
@@ -134,19 +134,19 @@ chmod +x /usr/local/bin/amprnet-start.sh
 
 ใช้สำหรับ shutdown AMPRNet workflow แบบมาตรฐาน
 
-Download:
+Download
 
 ```bash id="w7v2pk"
 wget -O /usr/local/bin/amprnet-stop.sh https://raw.githubusercontent.com/E25LVV/amprnet-ip44-for-asl3/main/tools/amprnet-stop.sh
 ```
 
-กำหนดสิทธิ์ execute:
+กำหนดสิทธิ์ execute
 
 ```bash id="x5m8vr"
 chmod +x /usr/local/bin/amprnet-stop.sh
 ```
 
-วิธีใช้งาน:
+วิธีใช้งาน
 
 ```bash id="q3n7xc"
 /usr/local/bin/amprnet-stop.sh
@@ -158,20 +158,29 @@ chmod +x /usr/local/bin/amprnet-stop.sh
 
 ใช้ตรวจสอบสถานะ AMPRNet แบบรวมในจุดเดียว
 
-Download:
+Download
 
 ```bash id="n8v4mk"
 wget -O /usr/local/bin/amprnet-status.sh https://raw.githubusercontent.com/E25LVV/amprnet-ip44-for-asl3/main/tools/amprnet-status.sh
 ```
 
-กำหนดสิทธิ์ execute:
+กำหนดสิทธิ์ execute
 
 ```bash id="m2x5vp"
 chmod +x /usr/local/bin/amprnet-status.sh
 ```
 
-วิธีใช้งาน:
+วิธีใช้งาน
 
 ```bash id="p6v8zr"
 /usr/local/bin/amprnet-status.sh
 ```
+---
+
+## E25LVV Philosophy
+
+ไม่ใช่กูรู เรียนรู้ ทดลอง แล้วแบ่งปัน
+
+Not a guru. Learning, experimenting, and sharing.
+
+
